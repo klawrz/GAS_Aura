@@ -3,6 +3,8 @@
 
 #include "Character/AuraCharacter.h"
 
+#include "AbilitySystemComponent.h"
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include <Player/AuraPlayerState.h>
 
