@@ -59,7 +59,7 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 			{
 
 				// Say that Tag = Message.HealthPotion
-				// "Message.HealthPotion".MatchesTag("Message) will return True, while "Message".MatchesTag("Message.HealthPotion") will return False
+				// "Message.HealthPotion".MatchesTag("Message") will return True, while "Message".MatchesTag("Message.HealthPotion") will return False
 				
 				FGameplayTag MessageTag = FGameplayTag::RequestGameplayTag(FName("Message"));
 				if (Tag.MatchesTag(MessageTag))
