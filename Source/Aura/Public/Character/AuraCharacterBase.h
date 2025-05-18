@@ -29,6 +29,11 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	FName WeaponTipSocketName;
+
+	virtual FVector GetCombatSocketLocation() override;
+
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
@@ -47,7 +52,7 @@ protected:
 	TSubclassOf<UGameplayEffect> DefaultVitalAttributes;
 
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
-	void InitializeDefaultAttributes() const;
+	virtual void InitializeDefaultAttributes() const;
 
 	void AddCharacterAbilities();
 
