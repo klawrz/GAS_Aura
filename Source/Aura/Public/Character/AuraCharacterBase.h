@@ -6,6 +6,7 @@
 #include "AbilitySystemInterface.h"
 #include "Interaction/CombatInterface.h"
 #include "GameFramework/Character.h"
+
 #include "AuraCharacterBase.generated.h"
 
 class UAbilitySystemComponent;
@@ -13,6 +14,7 @@ class UAttributeSet;
 class UGameplayEffect;
 class UGameplayAbility;
 class UAnimMontage;
+class UNiagarasystem;
 
 UCLASS(Abstract)
 class AURA_API AAuraCharacterBase : public ACharacter, public IAbilitySystemInterface, public ICombatInterface
@@ -28,12 +30,13 @@ public:
 
 	/* Combat Interface */
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
-	virtual UAnimMontage* GetAttackMontage_Implementation() override;
-	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
+	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& SocketTag) override;
+	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation();
+	virtual FTaggedMontage GetTaggedMontageByTag_Implementation(const FGameplayTag& MontageTag) override;
+	virtual UNiagaraSystem* GetBloodEffect_Implementation() override;
 	virtual void Die() override;
 	virtual bool IsDead_Implementation() const override;
 	virtual AActor* GetAvatar_Implementation() override;
-	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation();
 	/* End Combat Interface */
 
 	UFUNCTION(NetMulticast, Reliable)
@@ -97,13 +100,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UMaterialInstance> WeaponDissolveMaterialInstance;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UNiagaraSystem* BloodEffect;
+
 private:
 	UPROPERTY(EditAnywhere, Category = "Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<UAnimMontage> HitReactMontage;
-	
-	UPROPERTY(EditAnywhere, Category = "Combat")
-	TObjectPtr<UAnimMontage> AttackMontage;
 };
