@@ -23,11 +23,11 @@ public:
 	virtual void BroadcastInitialValues() override;
 	virtual void BindCallbacksToDependencies() override;
 	
-	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
+	UPROPERTY(BlueprintAssignable, Category = "Setup|GAS|Attributes")
 	FAttributeInfoSignature AttributeInfoDelegate;
 
 protected:
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup|Input")
 	TObjectPtr<UAttributeInfo> AttributeInfo;
 
 private:
