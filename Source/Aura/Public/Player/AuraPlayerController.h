@@ -15,6 +15,7 @@ class UAuraInputConfig;
 class UAuraAbilitySystemComponent;
 class USplineComponent;
 class UDamageTextComponent;
+class UNavigationSystemV1;
 
 /**
  * 
@@ -68,7 +69,6 @@ private:
 
 	UAuraAbilitySystemComponent* GetASC();
 
-	FVector CachedDestination = FVector::ZeroVector;
 	float FollowTime = 0.f;
 	float ShortPressThreshold = 0.5f;
 	bool bAutoRunning = false;
@@ -80,8 +80,23 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USplineComponent> Spline;
 
+	int32 TargetSplinePointIdx = 0;
+
 	void AutoRun();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup|Input")
 	TSubclassOf<UDamageTextComponent> DamageTextComponentClass;
+
+	UPROPERTY()
+	TObjectPtr<UNavigationSystemV1> NavSystem;
+
+	UPROPERTY(EditDefaultsOnly)
+	bool bDrawDebugEnabled = false;
+
+	float ControlledPawnHalfHeight = 0.0f;
+
+	bool GetCursorPlaneIntersection(const FVector& InPlaneOrigin, const FVector& InPlaneNormal, FVector& OutPlanePoint) const;
+	bool GetScreenPositionPlaneIntersection(const FVector2D& ScreenPosition, const FVector& InPlaneOrigin, const FVector& InPlaneNormal, FVector& OutPlanePoint) const;
+
+
 };

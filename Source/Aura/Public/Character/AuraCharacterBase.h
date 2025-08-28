@@ -119,4 +119,6 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Setup|Combat")
 	TObjectPtr<UAnimMontage> HitReactMontage;
+
+	FORCEINLINE virtual float GetHalfHeight() const { return 0.0f; }
 };

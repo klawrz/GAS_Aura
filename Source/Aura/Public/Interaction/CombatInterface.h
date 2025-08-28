@@ -81,4 +81,5 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void IncrementMinionCount(int32 Amount);
 
+	FORCEINLINE virtual float GetHalfHeight() const { return 0.0f; }
 };
